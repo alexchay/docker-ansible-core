@@ -1,0 +1,138 @@
+# https://taskfile.dev
+version: "3"
+dotenv: ['.env']
+env:
+  # PYTHON_VERSION: "3.10"
+vars:
+  PYTHON: python3
+  DOCKER_BUILDKIT: 1
+  DOCKER_BUILD_ARGS: >-
+    --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY
+    --build-arg CI_REGISTRY
+    --build-arg PYTHON_VERSION
+    --build-arg BASE_IMAGE_NAME --build-arg BASE_IMAGE_TAG
+  DOCKER_RUN_ARGS: >-
+    -e HTTP_PROXY -e HTTPS_PROXY -e NO_PROXY
+    -v $(pwd)/:/build/ -w /build/
+
+
+includes:
+  b2v:
+    taskfile: ./taskfiles/b2v.yml
+  pre-commit:
+    taskfile: ./taskfiles/pre-commit.yml
+  uv:
+    taskfile: ./taskfiles/uv.yml
+
+
+tasks:
+  env:
+    desc: Print environment variables
+    cmds:
+      - |
+        env | grep -E '(HOME|PATH|IMAGE|DOCKER|TAG|PYTHON|REGISTRY|URL|CI_)'
+
+  install:
+    desc: Install current and required dependencies
+    cmds:
+      - uv sync --locked --no-default-groups --no-dev --no-editable
+      - task: export
+
+  install-all:
+    desc: Install all dependencies including the current project
+    cmds:
+      - uv sync --all-groups
+
+  export:
+    desc: Export dependencies
+    cmds:
+      - uv export -o requirements.txt --no-install-project --no-default-groups --no-hashes --no-header --no-editable --quiet
+
+  clean:
+    desc: Clean up the installed dependencies
+    cmds:
+      - rm -rf .venv
+
+  reinstall:
+    desc: Clean up and reinstall required dependencies
+    cmds:
+      - task: clean
+      - task: install
+
+  update:
+    desc: Update dependencies
+    cmds:
+      - uv sync --no-install-project --all-groups --upgrade
+
+  shell-check:
+    desc: Run static analysis tool (linter) for shell scripts
+    cmds:
+      - >-
+          docker run --rm -it {{.DOCKER_RUN_ARGS}}
+          koalaman/shellcheck-alpine:latest
+          sh -c "shellcheck --version && echo 'Checking...' && find scripts -name '*.sh' -exec shellcheck {} + && echo 'Done'"
+
+  dockerfile-check:
+    desc: Run static analysis tool (linter) for Dockerfile
+    cmds:
+      - >-
+          docker run --rm -it {{.DOCKER_RUN_ARGS}}
+          hadolint/hadolint:latest-alpine
+          sh -c 'hadolint --version && echo "Checking..." && hadolint Dockerfile && echo "Done"'
+
+  build-image:
+    desc: Build docker image
+    cmds:
+      - |
+        echo "Build from base image ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}"
+        export DOCKER_BUILDKIT={{.DOCKER_BUILDKIT}}
+        docker buildx build {{.DOCKER_BUILD_ARGS}} \
+        --progress plain \
+        -t local/${BUILD_IMAGE_NAME}:${BUILD_IMAGE_TAG} .
+
+  rebuild-image:
+    desc: ReBuild docker image
+    cmds:
+      - task: build-image
+        vars:
+          DOCKER_BUILD_ARGS: '{{.DOCKER_BUILD_ARGS}} --no-cache'
+
+  test-image:
+    desc: Test docker image
+    cmds:
+      - |
+        docker run --rm -it {{.DOCKER_RUN_ARGS}} \
+        --entrypoint "./scripts/test-image.sh" \
+        local/${BUILD_IMAGE_NAME}:${BUILD_IMAGE_TAG}
+
+  build-and-test:
+    desc: Build and test docker image
+    cmds:
+      - task: build-image
+      - task: test-image
+
+  run-image:
+    desc: Run docker image
+    cmds:
+      - task: build-image
+      - |
+        docker run --rm -it {{.DOCKER_RUN_ARGS}} \
+        local/${BUILD_IMAGE_NAME}:${BUILD_IMAGE_TAG} sh
+
+  changelog:
+    desc: Generate changelog
+    cmds:
+      - >-
+        docker run --rm -it {{.DOCKER_RUN_ARGS}}
+        --entrypoint ""
+        ghcr.io/orhun/git-cliff/git-cliff:latest
+        sh -c "git-cliff --version && git-cliff -r . -o /tmp/CHANGELOG.md && echo 'Changelog generated' && cat /tmp/CHANGELOG.md"
+
+  create-gh-release:
+    desc: Create GitHub release
+    cmds:
+      - gh release create $(uvx bump-my-version show current_version) --generate-notes
+
+
+
+
