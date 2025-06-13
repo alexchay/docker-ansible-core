@@ -1,0 +1,107 @@
+[project]
+name = "docker-ansible-CORE"
+version = "2025.06.01.0"
+description = ""
+readme = "README.md"
+authors = [
+    { name = "Alexander Chaykovskiy", email = "<alexchay@gmail.com>" }
+]
+license = { file = "LICENSE" }
+keywords = [
+    "docker",
+    "ansible",
+    "core",
+    "python",
+    "container",
+    "image",
+    "automation",
+]
+
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+package-mode = false
+packages = []
+requires-python = ">=3.10"
+dependencies = [
+]
+
+[project.urls]
+repository = "https://github.com/alexchay/docker-ansible-core"
+homepage = "https://github.com/alexchay/docker-ansible-core"
+
+
+[tool.uv]
+default-groups = []
+
+[dependency-groups]
+dev = [
+]
+
+test = [
+]
+
+docs = [
+]
+
+[tool.bumpversion]
+current_version = "2025.06.01.0"
+parse = """(?x)                      # Verbose mode
+    (?P<release>                     # The release part
+        (?:[1-9][0-9]{3})\\.         # "{YYYY}".
+        (?:1[0-2]|0[1-9])\\.         # "{0M}".
+        (?:3[0-1]|[1-2][0-9]|0[1-9]) # "{0D}"
+    )
+    (?:\\.(?P<patch>\\d+))?          # .patch, optional
+"""
+serialize = [
+    "{release}.{patch}"
+]
+
+search = "{current_version}"
+replace = "{new_version}"
+regex = false
+ignore_missing_version = false
+ignore_missing_files = false
+tag = true
+tag_name = "{new_version}"
+tag_message = "Version updated from {current_version} to {new_version}"
+sign_tags = false
+allow_dirty = false
+commit = true
+message = "bump: up2date {current_version} → {new_version}"
+moveable_tags = []
+commit_args = ""
+setup_hooks = []
+pre_commit_hooks = [
+    "uv lock",
+    "git add uv.lock",
+    "uv tool run git-cliff -r . -u --tag $BVHOOK_NEW_VERSION --prepend CHANGELOG.md",
+    "git add CHANGELOG.md",
+]
+post_commit_hooks = []
+
+[tool.bumpversion.parts.release]
+calver_format = "{YYYY}.{0M}.{0D}"
+
+[[tool.bumpversion.files]]
+filename = ".github/matrix.yml"
+
+[[tool.bumpversion.files]]
+filename = ".gitlab/matrix.yml"
+
+[[tool.bumpversion.files]]
+filename = "ansible_collections.yml"
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+
+[[tool.bumpversion.files]]
+filename = "Dockerfile"
+search = "created=\\d{{4}}-\\d{{2}}-\\d{{2}}T\\d{{2}}:\\d{{2}}:\\d{{2}}Z"
+replace = "created={utcnow:%Y-%m-%dT%H:%M:%SZ}"
+regex = true

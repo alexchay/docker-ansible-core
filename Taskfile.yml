@@ -9,6 +9,7 @@ vars:
   DOCKER_BUILD_ARGS: >-
     --build-arg HTTP_PROXY --build-arg HTTPS_PROXY --build-arg NO_PROXY
     --build-arg CI_REGISTRY
+    --build-arg ANSIBLE_CORE_VERSION
     --build-arg PYTHON_VERSION
     --build-arg BASE_IMAGE_NAME --build-arg BASE_IMAGE_TAG
   DOCKER_RUN_ARGS: >-
