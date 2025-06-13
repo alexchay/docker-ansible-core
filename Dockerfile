@@ -7,11 +7,11 @@ FROM hashicorp/envconsul:0.13 AS envconsul
 FROM ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
 LABEL \
     org.opencontainers.image.authors="Alexander Chaykovskiy  https://github.com/alexchay" \
-    org.opencontainers.image.created=2025-06-01T14:35:27Z \
+    org.opencontainers.image.created=2025-06-13T15:52:19Z \
     org.opencontainers.image.url=https://github.com/alexchay/docker-ansible-core \
     org.opencontainers.image.documentation=https://github.com/alexchay/docker-ansible-core\
     org.opencontainers.image.source=https://github.com/alexchay/docker-ansible-core \
-    org.opencontainers.image.version=2025.06.01.0 \
+    org.opencontainers.image.version=2025.06.13.0 \
     org.opencontainers.image.licenses=MIT
 
 USER root

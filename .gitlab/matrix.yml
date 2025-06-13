@@ -1,7 +1,7 @@
 # a matrix list of variables used in the container build process
 # Python version are taken from ansible's support matrix
 # https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix
-# version: 2025.06.01.0
+# version: 2025.06.13.0
 .parallel_matrix:
     parallel:
       matrix:

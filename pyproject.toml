@@ -1,6 +1,6 @@
 [project]
 name = "docker-ansible-CORE"
-version = "2025.06.01.0"
+version = "2025.06.13.0"
 description = ""
 readme = "README.md"
 authors = [
@@ -49,7 +49,7 @@ docs = [
 ]
 
 [tool.bumpversion]
-current_version = "2025.06.01.0"
+current_version = "2025.06.13.0"
 parse = """(?x)                      # Verbose mode
     (?P<release>                     # The release part
         (?:[1-9][0-9]{3})\\.         # "{YYYY}".
