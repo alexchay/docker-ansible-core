@@ -23,42 +23,27 @@ tasks:
     cmds:
       - task: bump-calver-patch
 
+  bump-calver-dry:
+    desc: Bump Cal version
+    cmds:
+      - task: bump-calver-patch-dry
+
   bump-calver-patch:
     desc: Bump Cal version
     cmds:
       - uvx bump-my-version bump --verbose patch
+
+  bump-calver-patch-dry:
+    desc: Bump Cal version
+    cmds:
+      - uvx bump-my-version bump --verbose --dry-run --allow-dirty patch
 
   bump-calver-release:
     desc: Bump Cal version
     cmds:
       - uvx bump-my-version bump --verbose release
 
-  bump-major:
-    desc: Bump major version
+  bump-calver-release-dry:
+    desc: Bump Cal version
     cmds:
-      - uvx bump-my-version bump --verbose major
-
-  bump-minor:
-    desc: Bump minor version
-    cmds:
-      - uvx bump-my-version bump --verbose minor
-
-  bump-patch:
-    desc: Bump patch version
-    cmds:
-      - uvx bump-my-version bump --verbose --dry-run --allow-dirty --patch
-
-  bump-major-dry:
-    desc: Bump major version
-    cmds:
-      - uvx bump-my-version bump --verbose --dry-run --allow-dirty major
-
-  bump-minor-dry:
-    desc: Bump minor version
-    cmds:
-      - uvx bump-my-version bump --verbose --dry-run --allow-dirty minor
-
-  bump-patch-dry:
-    desc: Bump patch version
-    cmds:
-      - uvx bump-my-version bump --verbose --dry-run --allow-dirty patch
+      - uvx bump-my-version bump --verbose --dry-run --allow-dirty release
