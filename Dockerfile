@@ -2,7 +2,7 @@ ARG BASE_IMAGE_NAME="defval"
 ARG BASE_IMAGE_TAG="defval"
 
 FROM ghcr.io/astral-sh/uv:0.12.10 AS ghcr_uv
-FROM hashicorp/envconsul:0.13 AS envconsul
+FROM hashicorp/envconsul:0.14 AS envconsul
 
 FROM ${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
 LABEL \
