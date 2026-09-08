@@ -1,8 +1,6 @@
 # https://taskfile.dev
 version: "3"
 dotenv: ['.env']
-env:
-  # PYTHON_VERSION: "3.10"
 vars:
   PYTHON: python3
   DOCKER_BUILDKIT: 1
@@ -133,7 +131,3 @@ tasks:
     desc: Create GitHub release
     cmds:
       - gh release create $(uvx bump-my-version show current_version) --generate-notes
-
-
-
-
