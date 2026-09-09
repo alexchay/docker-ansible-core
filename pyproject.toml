@@ -62,6 +62,7 @@ serialize = [
     "{release}.{patch}"
 ]
 
+allow_shell_hooks = true
 search = "{current_version}"
 replace = "{new_version}"
 regex = false
