@@ -66,10 +66,7 @@ RUN \
     # Due to executables provided by dependencies of tool packages are not installed in bin, find all executable files in the ansible-core bin directory (excluding hidden files),
     # then for each file, create a symbolic link in the user's ~/.local/bin directory if the link does not already exist.
     && find "$(uv tool dir)/ansible-core/bin/" -mindepth 1 -maxdepth 1 -type f -executable -regextype posix-extended -regex '^((.+/)?)[^.]+' -print0 \
-    | while IFS= read -r -d '' file; do \
-        link="${HOME}/.local/bin/$(basename "$file")"; \
-        [ -e "$link" ] || ln -s "$file" "$link"; \
-      done \
+        | xargs -0 -r -I{} bash -c 'file="$1"; link="${HOME}/.local/bin/$(basename "$file")"; [ -e "$link" ] || ln -s "$file" "$link"' _ {} \
     && ansible-galaxy collection install -r ansible_collections.yml
 
 
