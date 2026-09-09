@@ -75,6 +75,6 @@ jobs:
     needs: setup_build_env
     uses: alexchay/github-ci/.github/workflows/build_and_push_image_to_ghcr.yml@main
     with:
-      build_env_file: .build.env-${{ steps.setup.outputs.BUILD_IMAGE_TAGS }}-${{ github.sha }}
+      build_env_file: .build.env-${{ needs.setup_build_env.outputs.build_image_tags }}-${{ github.sha }}
       build_image_name: ${{ needs.setup_build_env.outputs.build_image_name }}
       build_image_tags: ${{ needs.setup_build_env.outputs.build_image_tags }}
