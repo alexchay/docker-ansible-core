@@ -1,10 +1,10 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 
 [[package]]
 name = "docker-ansible-core"
-version = "2025.6.13.0"
+version = "2026.9.9.0"
 source = { virtual = "." }
 
 [package.metadata]

@@ -1,7 +1,7 @@
 # a matrix list of variables used in the container build process
 # Python version are taken from ansible's support matrix
 # https://docs.ansible.com/ansible/latest/reference_appendices/release_and_maintenance.html#ansible-core-support-matrix
-# version: 2025.06.13.0
+# version: 2026.09.09.0
 include:
   # 2.21.3
   - ANSIBLE_CORE_VERSION: "2.21.3"
