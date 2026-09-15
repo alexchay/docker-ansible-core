@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026.09.15.0
+
+[ebeefbf](ebeefbf3da608d63f75a51bbc07b3af8815a14c1)...[3f39336](3f393365859dc1b83993661128c2ba37f984116e)
+
+### Features
+
+* [f32f5a6](f32f5a620723e197d723fbc95a9b58b9cf1437cf): Add community.general collection version 13.4.0 
+
+### Miscellaneous Tasks
+
+* [e9d2a36](e9d2a36081ce81571691a320f1a3347b9fcb98b4): Bimp Ansible core versions to 2.19.13, 2.20.8 and 2.21.4 
+* [3f39336](3f393365859dc1b83993661128c2ba37f984116e): Bump Ansible Core version to 2.20.9 in environment files 
+
 ## 2026.09.09.0
 
 [4cd0196](4cd0196fda7a49a85a6d5b89d9ab6eb42fbea799)...[5d7048a](5d7048a71a240ff83b4d84c6e792d335ca2ca4aa)
