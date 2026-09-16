@@ -23,7 +23,10 @@ RUN \
     apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     curl \
     jq \
+    iproute2 \
+    iputils-ping \
     openssh-client \
+    procps \
     patch \
     sshpass \
     sudo \
