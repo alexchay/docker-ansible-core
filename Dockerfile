@@ -22,6 +22,7 @@ RUN \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     curl \
+    gettext-base \
     jq \
     iproute2 \
     iputils-ping \
@@ -64,13 +65,11 @@ ENV UV_COMPILE_BYTECODE=1 \
 RUN \
     --mount=type=cache,target=$HOME/.cache/uv,uid=$USER_UID,gid=$USER_GID \
     --mount=type=bind,source=ansible_collections.yml,target=ansible_collections.yml \
-    uv tool install ansible-core==${ANSIBLE_CORE_VERSION} --with ansible-lint \
-    && uv tool install go-task-bin \
-    # Due to executables provided by dependencies of tool packages are not installed in bin, find all executable files in the ansible-core bin directory (excluding hidden files),
-    # then for each file, create a symbolic link in the user's ~/.local/bin directory if the link does not already exist.
-    && find "$(uv tool dir)/ansible-core/bin/" -mindepth 1 -maxdepth 1 -type f -executable -regextype posix-extended -regex '^((.+/)?)[^.]+' -print0 \
-        | xargs -0 -r -I{} bash -c 'file="$1"; link="${HOME}/.local/bin/$(basename "$file")"; [ -e "$link" ] || ln -s "$file" "$link"' _ {} \
-    && ansible-galaxy collection install -r ansible_collections.yml
+    --mount=type=bind,source=ansible_requirements.txt,target=ansible_requirements.txt \
+    pip install ansible-core==${ANSIBLE_CORE_VERSION} -r ansible_requirements.txt  \
+    && ansible-galaxy collection install -r ansible_collections.yml \
+    && uv tool install ansible-lint  \
+    && uv tool install go-task-bin
 
 
 # default command: display Ansible version
