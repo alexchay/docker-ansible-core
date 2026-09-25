@@ -23,6 +23,7 @@ RUN \
     apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     curl \
     gettext-base \
+    git \
     jq \
     iproute2 \
     iputils-ping \
@@ -62,6 +63,7 @@ ENV UV_COMPILE_BYTECODE=1 \
 
 # Install ansible-core
 # ENV PYTHONMALLOC=malloc
+# hadolint ignore=DL3042
 RUN \
     --mount=type=cache,target=$HOME/.cache/uv,uid=$USER_UID,gid=$USER_GID \
     --mount=type=bind,source=ansible_collections.yml,target=ansible_collections.yml \
