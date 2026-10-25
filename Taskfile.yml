@@ -110,6 +110,18 @@ tasks:
       - task: build-image
       - task: test-image
 
+  copy-image-to-podman:
+    desc: Copy docker image to podman storage
+    cmds:
+      - |
+        podman pull docker-daemon:local/${BUILD_IMAGE_NAME}:${BUILD_IMAGE_TAG}
+
+  build-and-copy:
+    desc: Build docker image and copy it to podman storage
+    cmds:
+      - task: build-image
+      - task: copy-image-to-podman
+
   run-image:
     desc: Run docker image
     cmds:
