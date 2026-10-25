@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026.10.25.0
+
+[f44bebe](f44bebec96842c6f3aaf013653c05c2e022902d2)...[7150efa](7150efaef0061aba9277d133fd3d25f06b8f24f6)
+
+### Bug Fixes
+
+* [7805169](7805169d6a4e7cc034922715917006335f98a57d): Install ansible using pip in the user environment. 
+
+### Dependencies
+
+* [8ab1e60](8ab1e60f6e09ffae16b7a8e8a7898e42ae463d48): Update ansible core to 2.19.14, 2.20.10 and 2.21.5 
+
+### Features
+
+* [bc0d045](bc0d045da027cf9a5ea1a75cff581e06aed17476): Add ip utils to the list of installed packages in Dockerfile 
+* [915e029](915e029e71b2359e3bd3df62353c70896385bcb2): Add "pexpect" to ansible requirements 
+* [d01ccc7](d01ccc704e97bedd0b5dd42501186f4121640067): Add "git" to the list of installed packages in Dockerfile 
+
+### Miscellaneous Tasks
+
+* [7150efa](7150efaef0061aba9277d133fd3d25f06b8f24f6): Add tasks to copy docker image to podman storage 
+
 ## 2026.09.15.0
 
 [ebeefbf](ebeefbf3da608d63f75a51bbc07b3af8815a14c1)...[3f39336](3f393365859dc1b83993661128c2ba37f984116e)
