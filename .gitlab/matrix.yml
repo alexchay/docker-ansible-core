@@ -5,51 +5,51 @@
 .parallel_matrix:
     parallel:
       matrix:
-        # 2.21.4
-        - ANSIBLE_CORE_VERSION: "2.21.4"
+        # 2.21.5
+        - ANSIBLE_CORE_VERSION: "2.21.5"
           PYTHON_VERSION: "3.14"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.14-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.21-p3.14,2.21.4,2.21.4-p3.14"
-        - ANSIBLE_CORE_VERSION: "2.21.4"
+          BUILD_IMAGE_TAGS: "2.21-p3.14,2.21.5,2.21.5-p3.14"
+        - ANSIBLE_CORE_VERSION: "2.21.5"
           PYTHON_VERSION: "3.13"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.13-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.21,2.21-p3.13,2.21.4,2.21.4-p3.13"
-        - ANSIBLE_CORE_VERSION: "2.21.4"
+          BUILD_IMAGE_TAGS: "2.21,2.21-p3.13,2.21.5,2.21.5-p3.13"
+        - ANSIBLE_CORE_VERSION: "2.21.5"
           PYTHON_VERSION: "3.12"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.12-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.21-p3.12,2.21.4-p3.12"
-        # 2.20.9
-        - ANSIBLE_CORE_VERSION: "2.20.9"
+          BUILD_IMAGE_TAGS: "2.21-p3.12,2.21.5-p3.12"
+        # 2.20.10
+        - ANSIBLE_CORE_VERSION: "2.20.10"
           PYTHON_VERSION: "3.13"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.13-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.20,2.20-p3.13,2.20.9,2.20.9-p3.13"
-        - ANSIBLE_CORE_VERSION: "2.20.9"
+          BUILD_IMAGE_TAGS: "2.20,2.20-p3.13,2.20.10,2.20.10-p3.13"
+        - ANSIBLE_CORE_VERSION: "2.20.10"
           PYTHON_VERSION: "3.12"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.12-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.20-p3.12,2.20.9-p3.12"
-        # 2.19.13
-        - ANSIBLE_CORE_VERSION: "2.19.13"
+          BUILD_IMAGE_TAGS: "2.20-p3.12,2.20.10-p3.12"
+        # 2.19.14
+        - ANSIBLE_CORE_VERSION: "2.19.14"
           PYTHON_VERSION: "3.12"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.12-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.19,2.19-p3.12,2.19.13,2.19.13-p3.12"
-        - ANSIBLE_CORE_VERSION: "2.19.13"
+          BUILD_IMAGE_TAGS: "2.19,2.19-p3.12,2.19.14,2.19.14-p3.12"
+        - ANSIBLE_CORE_VERSION: "2.19.14"
           PYTHON_VERSION: "3.11"
           BASE_IMAGE_NAME: $REGISTRY_URL/python-base
           BASE_IMAGE_TAG: "3.11-slim"
           BUILD_IMAGE_NAME: "ansible-core"
-          BUILD_IMAGE_TAGS: "2.19-p3.11,2.19.13-p3.11"
+          BUILD_IMAGE_TAGS: "2.19-p3.11,2.19.14-p3.11"
         # 2.18.19
         - ANSIBLE_CORE_VERSION: "2.18.19"
           PYTHON_VERSION: "3.12"
