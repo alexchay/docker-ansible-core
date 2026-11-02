@@ -12,4 +12,5 @@ echo "ansible version = " "$(ansible --version)"
 
 echo ""
 
-
+python3 -m pip -vvv list
+ansible-galaxy collection list
