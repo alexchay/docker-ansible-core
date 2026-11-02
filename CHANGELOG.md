@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026.11.02.0
+
+[70270b5](70270b54cb1968947b62e1c909237a4199b00ce8)...[649d0f6](649d0f6f7beb43c544b89e5fc9ca6fdccdc01d7d)
+
+### Features
+
+* [4025493](40254935d0542a44dafff9637dd9b0f4e95affab): Install ansible collections into  ANSIBLE_COLLECTIONS_PATH 
+
+### Miscellaneous Tasks
+
+* [649d0f6](649d0f6f7beb43c544b89e5fc9ca6fdccdc01d7d): Add commands to list installed Python packages and Ansible collections 
+
 ## 2026.10.25.0
 
 [f44bebe](f44bebec96842c6f3aaf013653c05c2e022902d2)...[7150efa](7150efaef0061aba9277d133fd3d25f06b8f24f6)

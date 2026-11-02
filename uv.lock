@@ -4,7 +4,7 @@ requires-python = ">=3.10"
 
 [[package]]
 name = "docker-ansible-core"
-version = "2026.10.25.0"
+version = "2026.11.2.0"
 source = { virtual = "." }
 default-groups = []
 
