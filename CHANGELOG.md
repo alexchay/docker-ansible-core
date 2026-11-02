@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2026.11.02.1
+
+[e18c25b](e18c25be1c7105ec61e82dbe97245f0d9a6c5fbf)...[d1b6a15](d1b6a155e2656f8364e93ebeabbbbe13efd19219)
+
+### Bug Fixes
+
+* [d1b6a15](d1b6a155e2656f8364e93ebeabbbbe13efd19219): Add hadolint ignore rule for cases where pip is updated without specifying a version 
+
 ## 2026.11.02.0
 
 [70270b5](70270b54cb1968947b62e1c909237a4199b00ce8)...[649d0f6](649d0f6f7beb43c544b89e5fc9ca6fdccdc01d7d)
