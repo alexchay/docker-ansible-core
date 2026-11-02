@@ -14,12 +14,15 @@ LABEL \
     org.opencontainers.image.version=2026.10.25.0 \
     org.opencontainers.image.licenses=MIT
 
+ENV \
+    ANSIBLE_COLLECTIONS_PATH=/usr/share/ansible/collections/ \
+    ANSIBLE_COLLECTIONS_SYSTEM_PATH=/usr/share/ansible/collections/
+
 USER root
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=SC2086
 RUN \
-  --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
     apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends \
     curl \
     gettext-base \
@@ -34,9 +37,11 @@ RUN \
     sudo \
     time \
     tree \
-    && rm -rf /tmp/* \
+    && chown root:root /bin/ping && chmod +s /bin/ping \
+    && mkdir -p ${ANSIBLE_COLLECTIONS_SYSTEM_PATH} && chown -R $USERNAME:$GROUPNAME ${ANSIBLE_COLLECTIONS_SYSTEM_PATH} \
+    && apt-get clean \
+    && rm -rf /tmp/* && rm -rf /var/cache/apt/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man
-
 
 # hadolint ignore=SC2086
 RUN <<EOT
@@ -61,18 +66,17 @@ ENV UV_COMPILE_BYTECODE=1 \
     UV_PYTHON_DOWNLOADS=never \
     UV_CACHE_DIR=$HOME/.cache/uv
 
-# Install ansible-core
+
 # ENV PYTHONMALLOC=malloc
 # hadolint ignore=DL3042
 RUN \
     --mount=type=cache,target=$HOME/.cache/uv,uid=$USER_UID,gid=$USER_GID \
     --mount=type=bind,source=ansible_collections.yml,target=ansible_collections.yml \
     --mount=type=bind,source=ansible_requirements.txt,target=ansible_requirements.txt \
-    pip install ansible-core==${ANSIBLE_CORE_VERSION} -r ansible_requirements.txt  \
-    && ansible-galaxy collection install -r ansible_collections.yml \
-    && uv tool install ansible-lint  \
-    && uv tool install go-task-bin
+    python3 -m pip install --no-cache-dir --upgrade pip && \
+    python3 -m pip install --no-cache-dir ansible-core==${ANSIBLE_CORE_VERSION} -r ansible_requirements.txt && \
+    ansible-galaxy collection install -r ansible_collections.yml --collections-path ${ANSIBLE_COLLECTIONS_SYSTEM_PATH} --force && \
+    uv tool install ansible-lint  && \
+    uv tool install go-task-bin
 
-
-# default command: display Ansible version
 CMD [ "ansible-playbook", "--version" ]
