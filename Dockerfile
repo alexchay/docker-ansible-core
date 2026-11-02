@@ -68,7 +68,7 @@ ENV UV_COMPILE_BYTECODE=1 \
 
 
 # ENV PYTHONMALLOC=malloc
-# hadolint ignore=DL3042
+# hadolint ignore=DL3013,DL3041,DL3042
 RUN \
     --mount=type=cache,target=$HOME/.cache/uv,uid=$USER_UID,gid=$USER_GID \
     --mount=type=bind,source=ansible_collections.yml,target=ansible_collections.yml \
